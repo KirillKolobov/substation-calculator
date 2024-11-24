@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   AppBar,
   Box,
@@ -21,6 +21,7 @@ import {
   Security as SecurityIcon,
   Shield as ShieldIcon,
   FlashOn as FlashOnIcon,
+  Build as BuildIcon,
 } from '@mui/icons-material';
 import { useState } from 'react';
 
@@ -37,11 +38,13 @@ const menuItems = [
   { text: 'Заземление', path: '/grounding', icon: <SecurityIcon /> },
   { text: 'Релейная защита', path: '/relay', icon: <ShieldIcon /> },
   { text: 'Молниезащита', path: '/lightning', icon: <FlashOnIcon /> },
+  { text: 'Реконструкция ячеек', path: '/reconstruction', icon: <BuildIcon /> },
 ];
 
 export default function Layout({ children }: LayoutProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -51,19 +54,41 @@ export default function Layout({ children }: LayoutProps) {
     <div>
       <Toolbar />
       <List>
-        {menuItems.map((item) => (
-          <ListItem
-            button
-            key={item.text}
-            onClick={() => {
-              navigate(item.path);
-              setMobileOpen(false);
-            }}
-          >
-            <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.text} />
-          </ListItem>
-        ))}
+        {menuItems.map((item) => {
+          const isActive = location.pathname === item.path || 
+            (item.path !== '/' && location.pathname.startsWith(item.path));
+            
+          return (
+            <ListItem
+              component="div"
+              key={item.text}
+              onClick={() => {
+                navigate(item.path);
+                setMobileOpen(false);
+              }}
+              sx={{ 
+                cursor: 'pointer',
+                backgroundColor: isActive ? 'action.selected' : 'transparent',
+                '&:hover': {
+                  backgroundColor: isActive ? 'action.selected' : 'action.hover'
+                }
+              }}
+            >
+              <ListItemIcon sx={{ color: isActive ? 'primary.main' : 'inherit' }}>
+                {item.icon}
+              </ListItemIcon>
+              <ListItemText 
+                primary={item.text} 
+                sx={{ 
+                  '& .MuiListItemText-primary': {
+                    color: isActive ? 'primary.main' : 'inherit',
+                    fontWeight: isActive ? 500 : 400
+                  }
+                }}
+              />
+            </ListItem>
+          );
+        })}
       </List>
     </div>
   );

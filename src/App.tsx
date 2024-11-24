@@ -7,6 +7,7 @@ import EquipmentSelection from './pages/EquipmentSelection';
 import Grounding from './pages/Grounding';
 import RelayProtection from './pages/RelayProtection';
 import LightningProtection from './pages/LightningProtection';
+import CellReconstruction from './pages/CellReconstruction';
 
 const theme = createTheme({
   palette: {
@@ -33,6 +34,7 @@ function App() {
             <Route path="/grounding" element={<Grounding />} />
             <Route path="/relay" element={<RelayProtection />} />
             <Route path="/lightning" element={<LightningProtection />} />
+            <Route path="/reconstruction" element={<CellReconstruction />} />
           </Routes>
         </Layout>
       </Router>
