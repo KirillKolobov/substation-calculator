@@ -1,50 +1,57 @@
-# React + TypeScript + Vite
+# Калькулятор для проектирования электрических подстанций
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Веб-приложение для помощи инженерам-проектировщикам электрических подстанций в расчетах и выборе оборудования.
 
-Currently, two official plugins are available:
+## Функциональность
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Расчет токов короткого замыкания
+- Выбор оборудования:
+  - Выключатели
+  - Разъединители
+  - Трансформаторы тока
+  - Трансформаторы напряжения
+  - Ошиновка
+- Расчет заземляющих устройств
+- Расчет и выбор релейной защиты
+- Расчет молниезащиты
 
-## Expanding the ESLint configuration
+## Технологии
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React 18
+- TypeScript
+- Material-UI
+- Vite
 
-- Configure the top-level `parserOptions` property like this:
+## Установка и запуск
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+1. Клонируйте репозиторий:
+```bash
+git clone https://github.com/KirillKolobov/substation-calculator.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+2. Перейдите в директорию проекта:
+```bash
+cd substation-calculator
 ```
+
+3. Установите зависимости:
+```bash
+npm install
+```
+
+4. Запустите приложение в режиме разработки:
+```bash
+npm run dev
+```
+
+5. Откройте [http://localhost:5173](http://localhost:5173) в браузере.
+
+## Сборка для production
+
+Для создания production-сборки выполните:
+
+```bash
+npm run build
+```
+
+Готовая сборка будет находиться в директории `dist`.
